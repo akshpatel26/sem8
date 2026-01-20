@@ -27,6 +27,7 @@ class DashboardManager:
         }
         
     def apply_dashboard_style(self):
+        
         """Apply custom styling for dashboard"""
         st.markdown("""
             <style>
@@ -610,10 +611,51 @@ class DashboardManager:
         except Exception as e:
             print(f"Error fetching admin logs: {str(e)}")
             return []
-
+    def add_back_to_home_button(self):
+        """Add a floating back to home button on the left side"""
+        st.markdown("""
+        <style>
+        .back-to-home-btn {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-to-home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .back-to-home-btn:active {
+            transform: translateY(0px);
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        # Create the button
+        if st.button("⬅️ Back to Home", key="back_home_btn", help="Return to main dashboard"):
+            st.session_state.page = 'home'
+            st.rerun()
     def render_dashboard(self):
         """Main dashboard rendering function"""
+        self.add_back_to_home_button()
         # Apply styling
+        
         st.markdown("""
             <style>
                 .dashboard-container {
@@ -1153,3 +1195,6 @@ class DashboardManager:
         fig.update_yaxes(title_text="Success Rate (%)", color=self.colors['text'])
         
         return fig
+    
+    
+    

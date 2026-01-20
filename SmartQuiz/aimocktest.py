@@ -351,46 +351,188 @@ def handle_answer_selection_with_timer(option_index):
     
     st.rerun()
 
+# def setup_phase():
+#     """Main setup interface"""
+
+#     # Only show mode selection if no mode is selected
+#     if not st.session_state.quiz_state.get('quiz_mode'):
+#         st.markdown("""
+#         ### 🎓 Welcome to Our Comprehensive Learning Platform!
+        
+#         **Learn, practice, and prepare with intelligent quizzes and AI-powered interviews.**
+#         """)
+
+#         st.markdown("### 🔍 Select Learning Mode:")
+
+#         # 1 row with 3 columns layout
+#         col1, col2, col3 = st.columns(3)
+
+#         # Question Bank Quiz
+#         with col1:
+#             if st.button(
+#                 "**📚 Question Bank Quiz**  \n*Pre-loaded curated questions*",
+#                 key="static_mode",
+#                 use_container_width=True
+#             ):
+#                 st.session_state.quiz_state['quiz_mode'] = 'static'
+#                 st.rerun()
+
+#         # AI Generated Quiz
+#         with col2:
+#             if st.button(
+#                 "**⚙️ AI-Generated Quiz**  \n*Unlimited AI-created questions*",
+#                 key="ai_mode",
+#                 use_container_width=True,
+#                 type="primary"
+#             ):
+#                 st.session_state.quiz_state['quiz_mode'] = 'ai'
+#                 st.rerun()
+
+#         # ML Based Quiz
+#         with col3:
+#             if st.button(
+#                 "**📘 ML-Based Quiz**  \n*Questions from semester PDFs*",
+#                 key="ml_mode",
+#                 use_container_width=True
+#             ):
+#                 st.session_state.quiz_state['quiz_mode'] = 'ml'
+#                 st.rerun()
+
+#     # Render setup pages based on selected mode
+#     else:
+#         mode = st.session_state.quiz_state['quiz_mode']
+
+#         if mode == 'ai':
+#             ai_quiz_setup()
+#         elif mode == 'static':
+#             static_quiz_setup()
+#         elif mode == 'ml':
+#             ml_quiz_setup()
+            
 def setup_phase():
     """Main setup interface"""
-    st.markdown("""
-    ### Welcome to Our Comprehensive Learning Platform!
-    
-    **Discover knowledge through interactive quizzes designed for modern learners.** 
-    
-    **Choose your preferred learning experience and challenge yourself across various domains with our advanced assessment system.**
-    """)
 
-    # Quiz mode selection
-    st.markdown("### Select Category Mode:")
-    
-    mode_col1, mode_col2 = st.columns(2)
-    
-    with mode_col1:
-        if st.button("**📚 Question Bank Quiz**   \n*Pre-loaded questions from our curated database*", 
-                     key="static_mode", use_container_width=True):
-            st.session_state.quiz_state['quiz_mode'] = 'static'
-            st.rerun()
-    
-    with mode_col2:
-        if st.button("**⚙️ AI-Generated Quiz**    \n*AI-powered practice, always new*", 
-                     key="ai_mode", use_container_width=True, type="primary"):
-            st.session_state.quiz_state['quiz_mode'] = 'ai'
-            st.rerun()
-    
-    # Show setup based on mode
-    if st.session_state.quiz_state['quiz_mode'] == 'ai':
-        ai_quiz_setup()
-    elif st.session_state.quiz_state['quiz_mode'] == 'static':
-        static_quiz_setup()
+    # Only show mode selection if no mode is selected
+    if not st.session_state.quiz_state.get('quiz_mode'):
+        st.markdown("""
+        ### 🎓 Welcome to Our Comprehensive Learning Platform!
+        
+        **Learn, practice, and prepare with intelligent quizzes and AI-powered interviews.**
+        """)
 
+        st.markdown("### 🔍 Select Learning Mode:")
+
+        # First row - 2 columns
+        col1, col2 = st.columns(2)
+
+        # Question Bank Quiz
+        with col1:
+            if st.button(
+                "**📚 Question Bank Quiz**  \n*Pre-loaded curated questions*",
+                key="static_mode",
+                use_container_width=True
+            ):
+                st.session_state.quiz_state['quiz_mode'] = 'static'
+                st.rerun()
+
+        # AI Generated Quiz
+        with col2:
+            if st.button(
+                "**⚙️ AI-Generated Quiz**  \n*Unlimited AI-created questions*",
+                key="ai_mode",
+                use_container_width=True,
+                type="primary"
+            ):
+                st.session_state.quiz_state['quiz_mode'] = 'ai'
+                st.rerun()
+
+        # Second row - 1 centered column
+        col_left, col_center, col_right = st.columns([1, 2, 1])
+        
+        # ML Based Quiz (centered)
+        with col_center:
+            if st.button(
+                "**📘 ML-Based Quiz**  \n*Questions from semester PDFs*",
+                key="ml_mode",
+                use_container_width=True
+            ):
+                st.session_state.quiz_state['quiz_mode'] = 'ml'
+                st.rerun()
+
+    # Render setup pages based on selected mode
+    else:
+        mode = st.session_state.quiz_state['quiz_mode']
+
+        if mode == 'ai':
+            ai_quiz_setup()
+        elif mode == 'static':
+            static_quiz_setup()
+        elif mode == 'ml':
+            ml_quiz_setup()
+
+    
+def ml_quiz_setup():
+    """ML-Based quiz setup interface"""
+    st.markdown("---")
+    st.markdown("## 📚 ML-Based Quiz Setup")
+    # st.markdown("This feature generates questions from your uploaded semester materials using advanced ML algorithms.")
+    
+    # Import and call the ML quiz function with error handling
+    try:
+        import sys
+        from pathlib import Path
+        
+        # Add current directory to Python path
+        current_dir = Path(__file__).parent
+        if str(current_dir) not in sys.path:
+            sys.path.insert(0, str(current_dir))
+        
+        # Now try importing
+        from ml_quiz import show_ml_quiz
+        
+        # col1, col2, col3 = st.columns([1, 2, 1])
+        # with col1:
+        #     if st.button("⬅️ Back", use_container_width=True):
+        #         st.session_state.quiz_state['quiz_mode'] = ''
+        #         st.rerun()
+        
+        # Show the ML quiz interface
+        show_ml_quiz()
+        
+    except ImportError as e:
+        st.error(f"❌ Error loading quiz: {str(e)}")
+        st.warning("Please ensure the quiz module is properly configured.")
+        st.info("""
+        **Troubleshooting Steps:**
+        1. Verify `ml_quiz.py` and `ml_model.py` are in the same folder as `quiz.py`
+        2. Check file permissions
+        3. Ensure all files are properly saved
+        4. Try restarting the Streamlit server
+        """)
+        
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            if st.button("⬅️ Back to Setup", use_container_width=True):
+                st.session_state.quiz_state['quiz_mode'] = ''
+                st.rerun()
+    except Exception as e:
+        st.error(f"❌ Unexpected error: {str(e)}")
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            if st.button("⬅️ Back to Setup", use_container_width=True):
+                st.session_state.quiz_state['quiz_mode'] = ''
+                st.rerun()
 
 def static_quiz_setup():
     """Question Bank quiz setup interface"""
-    st.markdown("---")
     st.markdown("## 📚 Question Bank Quiz Setup")
     
-    # Categories selection
+    # Show settings if category selected (and not programming)
+    if st.session_state.quiz_state.get('category') and st.session_state.quiz_state['category'] != 'programming':
+        show_static_quiz_settings()
+        return  # Stop here, don't show category buttons
+    
+    # Show category selection only if not selected
     st.markdown("### Select Category:")
     
     categories = [
@@ -411,32 +553,30 @@ def static_quiz_setup():
                 st.session_state.quiz_state['category'] = category
                 if category == 'programming':
                     st.session_state.quiz_state['phase'] = 'programming_language'
-                    st.rerun()
-                else:
-                    st.rerun()
+                st.rerun()
     
     # Create second row with centered layout for 2 items
-    # Using [1, 1, 1, 1] creates 4 equal columns, we use middle 2 for centering
     row2_cols = st.columns([1, 2, 2, 1])
     
     for i, (category, icon, display_name) in enumerate(categories[3:]):
-        # Use columns 1 and 2 (middle columns) for the 2 remaining items
         with row2_cols[i + 1]:
             if st.button(f"{icon}\n**{display_name}**",
                         key=f"static_cat_{category}", use_container_width=True):
                 st.session_state.quiz_state['category'] = category
                 if category == 'programming':
                     st.session_state.quiz_state['phase'] = 'programming_language'
-                    st.rerun()
-                else:
-                    st.rerun()
+                st.rerun()
     
-    # Show settings if category selected (and not programming)
-    if st.session_state.quiz_state.get('category') and st.session_state.quiz_state['category'] != 'programming':
-        show_static_quiz_settings()
+    # Add Back button
+    st.markdown("<br>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col2:
+        if st.button("⬅️ Back to Mode Selection", use_container_width=True):
+            st.session_state.quiz_state['quiz_mode'] = ''
+            st.rerun()
+
 def show_static_quiz_settings():
     """Show settings for static quiz"""
-    st.markdown("---")
     st.markdown("### ⚙️ Quiz Settings")
     
     category = st.session_state.quiz_state['category']
@@ -477,8 +617,7 @@ def show_static_quiz_settings():
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col1:
-        if st.button("⬅️ Back", use_container_width=True):
-            st.session_state.quiz_state['quiz_mode'] = ''
+        if st.button("⬅️ Back to Categories", use_container_width=True):
             st.session_state.quiz_state['category'] = ''
             st.rerun()
     
@@ -611,50 +750,59 @@ def programming_settings_phase():
 
 def ai_quiz_setup():
     """AI quiz setup interface"""
-    st.markdown("---")
-    st.markdown("## ⚙️AI-Generated Quiz Setup")
-    st.markdown("### Select Topic:")
+    
+    # Show topic selection only if no topic is selected
+    if not st.session_state.quiz_state.get('ai_topic'):
+        st.markdown("## ⚙️ AI-Generated Quiz Setup")
+        st.markdown("### Select Topic:")
 
-    ai_topics = [
-        ("Practice Set-1", "📚", "Numerical Ability"),
-        ("Practice Set-2", "📚", "Verbal and Reasoning"),
-        ("Practice Set-3", "📚", "Programming Logic"),
-        ("Practice Set-4", "📚", "Mock Test-1"),
-        ("Practice Set-5", "📚", "Mock Test-2"),
-        ("Practice Set-6", "📚", "Mock Test-3")
-    ]
+        ai_topics = [
+            ("Practice Set-1", "📚", "Numerical Ability"),
+            ("Practice Set-2", "📚", "Verbal and Reasoning"),
+            ("Practice Set-3", "📚", "Programming Logic"),
+            ("Practice Set-4", "📚", "Mock Test-1"),
+            ("Practice Set-5", "📚", "Mock Test-2"),
+            ("Practice Set-6", "📚", "Mock Test-3")
+        ]
 
-    topic_row1 = st.columns(3)
-    topic_row2 = st.columns(3)
+        topic_row1 = st.columns(3)
+        topic_row2 = st.columns(3)
 
-    # First row
-    for i, (set_name, icon, description) in enumerate(ai_topics[:3]):
-        with topic_row1[i]:
-            if st.button(f"**{set_name}**\n{icon} {description}",
-                         key=f"ai_topic_{set_name}", use_container_width=True):
-                st.session_state.quiz_state['ai_topic'] = set_name
+        # First row
+        for i, (set_name, icon, description) in enumerate(ai_topics[:3]):
+            with topic_row1[i]:
+                if st.button(f"**{set_name}**\n{icon} {description}",
+                             key=f"ai_topic_{set_name}", use_container_width=True):
+                    st.session_state.quiz_state['ai_topic'] = set_name
+                    st.rerun()
+
+        # Second row
+        for i, (set_name, icon, description) in enumerate(ai_topics[3:]):
+            with topic_row2[i]:
+                if st.button(f"**{set_name}**\n{icon} {description}",
+                             key=f"ai_topic_{set_name}", use_container_width=True):
+                    st.session_state.quiz_state['ai_topic'] = set_name
+                    st.rerun()
+        
+        # Back button below topic selection
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            if st.button("⬅️ Back to Mode Selection", use_container_width=True):
+                st.session_state.quiz_state['quiz_mode'] = ''
                 st.rerun()
-
-    # Second row
-    for i, (set_name, icon, description) in enumerate(ai_topics[3:]):
-        with topic_row2[i]:
-            if st.button(f"**{set_name}**\n{icon} {description}",
-                         key=f"ai_topic_{set_name}", use_container_width=True):
-                st.session_state.quiz_state['ai_topic'] = set_name
-                st.rerun()
-
-    if st.session_state.quiz_state.get('ai_topic'):
+    else:
+        # Show settings if topic is selected
         show_ai_quiz_settings()
 
 def show_ai_quiz_settings():
     """Show settings for AI quiz"""
-    st.markdown("---")
-    st.markdown("### ⚙️ AI Quiz Settings")
+    st.markdown("## ⚙️ AI Quiz Settings")
     
     topic = st.session_state.quiz_state['ai_topic']
-    st.success(f"✅ Selected Topic: ⚙️{topic}")
+    st.success(f"✅ Selected Topic: {topic}")
     
-    # Two columns instead of three
+    
+    # Two columns for settings
     col1, col2 = st.columns(2)
     
     with col1:
@@ -669,7 +817,7 @@ def show_ai_quiz_settings():
     with col2:
         timer_duration = st.selectbox(
             "⏱️ Timer (seconds)",
-            options=[30,45,60,90],
+            options=[30, 45, 60, 90],
             index=0,
             key="ai_timer"
         )
@@ -677,11 +825,12 @@ def show_ai_quiz_settings():
     
     st.info(f"📊 **{num_questions}** questions | ⏱️ **{timer_duration}s** per question")
     
+    st.markdown("---")
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col1:
         if st.button("⬅️ Back", use_container_width=True):
-            st.session_state.quiz_state['quiz_mode'] = ''
+            # Clear the selected topic to go back to topic selection
             st.session_state.quiz_state['ai_topic'] = ''
             st.rerun()
     

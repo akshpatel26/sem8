@@ -118,34 +118,34 @@ def render_company_section():
     """, unsafe_allow_html=True)
 
     # Featured Companies
-    st.markdown("### 🏢 Featured Companies")
+    # st.markdown("### 🏢 Featured Companies")
     
     
-    tabs = st.tabs(["All Companies", "Tech Giants", "Indian Tech", "Global Corps"])
+    # tabs = st.tabs(["All Companies", "Tech Giants", "Indian Tech", "Global Corps"])
     
-    categories = [None, "tech", "indian_tech", "global_corps"]
-    for tab, category in zip(tabs, categories):
-        with tab:
-            companies = get_featured_companies(category)
-            st.markdown('<div class="company-grid">', unsafe_allow_html=True)
+    # categories = [None, "tech", "indian_tech", "global_corps"]
+    # for tab, category in zip(tabs, categories):
+    #     with tab:
+    #         companies = get_featured_companies(category)
+    #         st.markdown('<div class="company-grid">', unsafe_allow_html=True)
             
-            for company in companies:
-                st.markdown(f"""
-                    <a href="{company['careers_url']}" target="_blank" style="text-decoration: none; color: inherit;">
-                        <div class="company-card">
-                            <div class="company-header">
-                                <i class="{company['icon']} company-icon" style="color: {company['color']}"></i>
-                                <h3 style="margin: 0;">{company['name']}</h3>
-                            </div>
-                            <p style="margin: 0.5rem 0; color: #888;">{company['description']}</p>
-                            <div class="company-categories">
-                                {' '.join(f'<span class="company-category">{cat}</span>' for cat in company['categories'])}
-                            </div>
-                        </div>
-                    </a>
-                """, unsafe_allow_html=True)
+    #         for company in companies:
+    #             st.markdown(f"""
+    #                 <a href="{company['careers_url']}" target="_blank" style="text-decoration: none; color: inherit;">
+    #                     <div class="company-card">
+    #                         <div class="company-header">
+    #                             <i class="{company['icon']} company-icon" style="color: {company['color']}"></i>
+    #                             <h3 style="margin: 0;">{company['name']}</h3>
+    #                         </div>
+    #                         <p style="margin: 0.5rem 0; color: #888;">{company['description']}</p>
+    #                         <div class="company-categories">
+    #                             {' '.join(f'<span class="company-category">{cat}</span>' for cat in company['categories'])}
+    #                         </div>
+    #                     </div>
+    #                 </a>
+    #             """, unsafe_allow_html=True)
             
-            st.markdown('</div>', unsafe_allow_html=True)
+    #         st.markdown('</div>', unsafe_allow_html=True)
 
 def render_market_insights():
     """Render job market insights section using st.expander"""
@@ -236,65 +236,65 @@ def render_market_insights():
         </style>
     """, unsafe_allow_html=True)
 
-    st.markdown("### 📊 Job Market Insights")
+    # st.markdown("### 📊 Job Market Insights")
     
-    # Trending Skills Expander
-    with st.expander("🔥 Trending Skills", expanded=False):
-        st.markdown('<div class="insights-grid">', unsafe_allow_html=True)
-        for skill in insights["trending_skills"]:
-            st.markdown(f"""
-                <div class="insight-card">
-                    <i class="{skill['icon']} insight-icon"></i>
-                    <h4>{skill['name']}</h4>
-                    <p class="growth-text">Growth: {skill['growth']}</p>
-                </div>
-            """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
+    # # Trending Skills Expander
+    # with st.expander("🔥 Trending Skills", expanded=False):
+    #     st.markdown('<div class="insights-grid">', unsafe_allow_html=True)
+    #     for skill in insights["trending_skills"]:
+    #         st.markdown(f"""
+    #             <div class="insight-card">
+    #                 <i class="{skill['icon']} insight-icon"></i>
+    #                 <h4>{skill['name']}</h4>
+    #                 <p class="growth-text">Growth: {skill['growth']}</p>
+    #             </div>
+    #         """, unsafe_allow_html=True)
+    #     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Top Locations Expander
-    with st.expander("📍 Top Locations", expanded=False):
-        st.markdown('<div class="insights-grid">', unsafe_allow_html=True)
-        for location in insights["top_locations"]:
-            st.markdown(f"""
-                <div class="insight-card">
-                    <i class="{location['icon']} insight-icon"></i>
-                    <h4>{location['name']}</h4>
-                    <p>Available Jobs: {location['jobs']}</p>
-                </div>
-            """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
+    # # Top Locations Expander
+    # with st.expander("📍 Top Locations", expanded=False):
+    #     st.markdown('<div class="insights-grid">', unsafe_allow_html=True)
+    #     for location in insights["top_locations"]:
+    #         st.markdown(f"""
+    #             <div class="insight-card">
+    #                 <i class="{location['icon']} insight-icon"></i>
+    #                 <h4>{location['name']}</h4>
+    #                 <p>Available Jobs: {location['jobs']}</p>
+    #             </div>
+    #         """, unsafe_allow_html=True)
+    #     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Salary Insights Expander
-    with st.expander("💰 Salary Insights", expanded=False):
-        # Role-specific icons
-        role_icons = {
-            "Software Engineer": "fas fa-code",
-            "Data Scientist": "fas fa-brain",
-            "Product Manager": "fas fa-tasks",
-            "DevOps Engineer": "fas fa-server",
-            "UI/UX Designer": "fas fa-paint-brush"
-        }
+    # # Salary Insights Expander
+    # with st.expander("💰 Salary Insights", expanded=False):
+    #     # Role-specific icons
+    #     role_icons = {
+    #         "Software Engineer": "fas fa-code",
+    #         "Data Scientist": "fas fa-brain",
+    #         "Product Manager": "fas fa-tasks",
+    #         "DevOps Engineer": "fas fa-server",
+    #         "UI/UX Designer": "fas fa-paint-brush"
+    #     }
         
-        for insight in insights["salary_insights"]:
-            role = insight['role']
-            icon = role_icons.get(role, "fas fa-briefcase")
+    #     for insight in insights["salary_insights"]:
+    #         role = insight['role']
+    #         icon = role_icons.get(role, "fas fa-briefcase")
             
-            st.markdown(f"""
-                <div class="salary-card">
-                    <div class="salary-header">
-                        <i class="{icon} role-icon"></i>
-                        <div>
-                            <h3 class="role-title">{role}</h3>
-                            <div class="salary-details">
-                                <span class="salary-tag">₹ {insight['range']}</span>
-                                <span class="experience-tag">
-                                    <i class="fas fa-history"></i> {insight['experience']}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            """, unsafe_allow_html=True)
+    #         st.markdown(f"""
+    #             <div class="salary-card">
+    #                 <div class="salary-header">
+    #                     <i class="{icon} role-icon"></i>
+    #                     <div>
+    #                         <h3 class="role-title">{role}</h3>
+    #                         <div class="salary-details">
+    #                             <span class="salary-tag">₹ {insight['range']}</span>
+    #                             <span class="experience-tag">
+    #                                 <i class="fas fa-history"></i> {insight['experience']}
+    #                             </span>
+    #                         </div>
+    #                     </div>
+    #                 </div>
+    #             </div>
+    #         """, unsafe_allow_html=True)
 
 # Alternative version with individual expanders for each category
 def render_market_insights_individual():
@@ -384,8 +384,7 @@ if __name__ == "__main__":
 
 def render_job_search():
     """Render job search page with enhanced features"""
-    st.markdown("## 🔍 Smart Job Search")
-    st.markdown("Find Your Dream Job Across Multiple Platforms")
+    
     
     # Market Insights Section (Above Search)
     render_market_insights()
@@ -413,7 +412,7 @@ def render_job_search():
             </style>
         """, unsafe_allow_html=True)
         
-        st.markdown('<div class="search-container">', unsafe_allow_html=True)
+        # st.markdown('<div class="search-container">', unsafe_allow_html=True)
         
         # Create tabs with icons
         tabs = option_menu(

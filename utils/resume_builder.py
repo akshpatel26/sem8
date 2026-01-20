@@ -8,6 +8,9 @@ from docx.oxml.ns import nsdecls
 from io import BytesIO
 import tempfile
 import traceback
+import re
+from typing import Dict, List, Tuple
+
 
 class ResumeBuilder:
     def __init__(self):
@@ -22,6 +25,13 @@ class ResumeBuilder:
         """Generate a resume based on the provided data and template"""
         try:
             print(f"Starting resume generation with template: {data['template']}")
+            
+            # Validate personal information before proceeding
+            validation_errors = self.validate_personal_info(data['personal_info'])
+            if validation_errors:
+                error_message = "Validation errors:\n" + "\n".join([f"  - {err}" for err in validation_errors])
+                print(error_message)
+                raise ValueError(error_message)
             
             # Create a new document
             doc = Document()
@@ -55,6 +65,166 @@ class ResumeBuilder:
             print(f"Full traceback: {traceback.format_exc()}")
             print(f"Template data: {data}")
             raise
+
+    def validate_personal_info(self, personal_info: Dict) -> List[str]:
+        """Validate all personal information fields and return list of errors"""
+        errors = []
+        
+        # Validate full name
+        is_valid, msg = self.validate_full_name(personal_info.get('full_name', ''))
+        if not is_valid:
+            errors.append(f"Full Name: {msg}")
+        
+        # Validate email
+        is_valid, msg = self.validate_email(personal_info.get('email', ''))
+        if not is_valid:
+            errors.append(f"Email: {msg}")
+        
+        # Validate phone
+        is_valid, msg = self.validate_phone(personal_info.get('phone', ''))
+        if not is_valid:
+            errors.append(f"Phone: {msg}")
+        
+        # Validate location
+        is_valid, msg = self.validate_location(personal_info.get('location', ''))
+        if not is_valid:
+            errors.append(f"Location: {msg}")
+        
+        # Validate LinkedIn URL
+        is_valid, msg = self.validate_linkedin_url(personal_info.get('linkedin', ''))
+        if not is_valid:
+            errors.append(f"LinkedIn URL: {msg}")
+        
+        # Validate Portfolio URL
+        is_valid, msg = self.validate_portfolio_url(personal_info.get('portfolio', ''))
+        if not is_valid:
+            errors.append(f"Portfolio URL: {msg}")
+        
+        return errors
+
+    def validate_full_name(self, name: str) -> Tuple[bool, str]:
+        """Validate full name"""
+        if not name or not name.strip():
+            return False, "Full name is required"
+        
+        name = name.strip()
+        
+        if len(name) < 2:
+            return False, "Name must be at least 2 characters long"
+        
+        name_parts = name.split()
+        if len(name_parts) < 2:
+            return False, "Please provide both first and last name"
+        
+        if not re.match(r"^[a-zA-Z\s\-'\.]+$", name):
+            return False, "Name can only contain letters, spaces, hyphens, and apostrophes"
+        
+        if len(name) > 100:
+            return False, "Name is too long (maximum 100 characters)"
+        
+        return True, "Valid"
+
+    def validate_email(self, email: str) -> Tuple[bool, str]:
+        """Validate email address"""
+        if not email or not email.strip():
+            return False, "Email is required"
+        
+        email = email.strip().lower()
+        
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        
+        if not re.match(email_pattern, email):
+            return False, "Invalid email format (e.g., user@example.com)"
+        
+        if '..' in email:
+            return False, "Email cannot contain consecutive dots"
+        
+        if email.startswith('.') or email.startswith('@'):
+            return False, "Email cannot start with . or @"
+        
+        if len(email) > 254:
+            return False, "Email is too long"
+        
+        return True, "Valid"
+
+    def validate_phone(self, phone: str) -> Tuple[bool, str]:
+        """Validate phone number"""
+        if not phone or not phone.strip():
+            return False, "Phone number is required"
+        
+        phone = phone.strip()
+        
+        cleaned_phone = re.sub(r'[\s\-\(\)\.]', '', phone)
+        
+        if not re.match(r'^\+?[0-9]+$', cleaned_phone):
+            return False, "Phone number can only contain digits and optional + prefix"
+        
+        if len(cleaned_phone) < 10:
+            return False, "Phone number is too short (minimum 10 digits)"
+        
+        if len(cleaned_phone) > 15:
+            return False, "Phone number is too long (maximum 15 digits)"
+        
+        return True, "Valid"
+
+    def validate_location(self, location: str) -> Tuple[bool, str]:
+        """Validate location/address"""
+        if not location or not location.strip():
+            return False, "Location is required"
+        
+        location = location.strip()
+        
+        if len(location) < 3:
+            return False, "Location must be at least 3 characters"
+        
+        if len(location) > 200:
+            return False, "Location is too long (maximum 200 characters)"
+        
+        if not re.match(r"^[a-zA-Z0-9\s,.\-]+$", location):
+            return False, "Location contains invalid characters"
+        
+        return True, "Valid"
+
+    def validate_linkedin_url(self, linkedin: str) -> Tuple[bool, str]:
+        """Validate LinkedIn URL"""
+        if not linkedin or not linkedin.strip():
+            return False, "LinkedIn URL is required"
+        
+        linkedin = linkedin.strip()
+        
+        linkedin_patterns = [
+            r'^https?://(www\.)?linkedin\.com/in/[\w\-]+/?$',
+            r'^https?://(www\.)?linkedin\.com/pub/[\w\-]+/?$',
+            r'^linkedin\.com/in/[\w\-]+/?$',
+            r'^www\.linkedin\.com/in/[\w\-]+/?$'
+        ]
+        
+        is_valid = any(re.match(pattern, linkedin, re.IGNORECASE) for pattern in linkedin_patterns)
+        
+        if not is_valid:
+            return False, "Invalid LinkedIn URL format (e.g., https://linkedin.com/in/username)"
+        
+        if len(linkedin) > 500:
+            return False, "LinkedIn URL is too long"
+        
+        return True, "Valid"
+
+    def validate_portfolio_url(self, portfolio: str) -> Tuple[bool, str]:
+        """Validate Portfolio/Website URL"""
+        if not portfolio or not portfolio.strip():
+            return False, "Portfolio URL is required"
+        
+        portfolio = portfolio.strip()
+        
+        url_pattern = r'^https?://(www\.)?[\w\-]+(\.[\w\-]+)+(/[\w\-._~:/?#[\]@!$&\'()*+,;=]*)?$'
+        
+        if not re.match(url_pattern, portfolio, re.IGNORECASE):
+            return False, "Invalid URL format (e.g., https://www.example.com)"
+        
+        if len(portfolio) > 500:
+            return False, "Portfolio URL is too long"
+        
+        return True, "Valid"
 
     def _format_list_items(self, items):
         """Helper function to handle both string and list inputs"""
@@ -498,7 +668,7 @@ class ResumeBuilder:
                     p.add_run(f"{exp['position']} at {exp['company']}").bold = True
                     p.add_run(f"\n{exp['start_date']} - {exp['end_date']}")
                     
-                    if exp.get('description'):  # Changed from 'overview' to 'description'
+                    if exp.get('description'):
                         overview = doc.add_paragraph(exp['description'])
                         overview.style = normal_style
                     
@@ -527,7 +697,7 @@ class ResumeBuilder:
                     if proj.get('technologies'):
                         p.add_run(f"\nTechnologies: {proj['technologies']}")
                     
-                    if proj.get('description'):  # Changed from 'overview' to 'description'
+                    if proj.get('description'):
                         overview = doc.add_paragraph(proj['description'])
                         overview.style = normal_style
                     
