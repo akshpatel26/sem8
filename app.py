@@ -10,7 +10,7 @@ from docx.shared import Inches, Pt
 from docx import Document
 import io
 import base64
-from smartQuiz.aimockinterview import MockInterviewSystem
+from SmartQuiz.aimockinterview import MockInterviewSystem
 import plotly.graph_objects as go
 from streamlit_lottie import st_lottie
 import requests
@@ -34,7 +34,7 @@ from utils.ai_resume_analyzer import AIResumeAnalyzer
 from utils.resume_builder import ResumeBuilder
 from utils.portfolio_builder import PortfolioBuilder
 from utils.resume_analyzer import ResumeAnalyzer
-from smartQuiz.aimocktest import run_quiz 
+from SmartQuiz.aimocktest import run_quiz 
 
 import traceback
 import plotly.express as px
@@ -4564,7 +4564,7 @@ class ResumeApp:
             
             # જો API key છે તો interview શરૂ કરો
             if groq_api_key:
-                from smartQuiz.aimockinterview import MockInterviewSystem
+                from SmartQuiz.aimockinterview import MockInterviewSystem
                 mock_system = MockInterviewSystem(groq_api_key)
                 mock_system.run()
             else:
