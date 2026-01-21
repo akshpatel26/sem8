@@ -26,6 +26,7 @@ from ui_components import (
     page_header, render_analytics_section, render_activity_section,
     render_suggestions_section
 )
+
 from jobs.job_search import render_job_search
 from feedback.feedback import FeedbackManager
 from dashboard.dashboard import DashboardManager
