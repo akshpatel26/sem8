@@ -10,7 +10,7 @@ from docx.shared import Inches, Pt
 from docx import Document
 import io
 import base64
-# from SmartQuiz.aimockinterview import MockInterviewSystem
+from SmartQuiz.aimockinterview import MockInterviewSystem
 import plotly.graph_objects as go
 from streamlit_lottie import st_lottie
 import requests
@@ -4541,46 +4541,45 @@ class ResumeApp:
         self.add_footer()
     
     
-    # ResumeApp class માં આ method add કરો
-    # def render_mock_interview(self):
-    #     """Render mock interview page"""
-    #     try:
-    #         # API key લો secrets માંથી
-    #         groq_api_key = st.secrets.get("GROQ_API_KEY", "")
+    def render_mock_interview(self):
+        """Render mock interview page"""
+        try:
+            # API key લો secrets માંથી
+            groq_api_key = st.secrets.get("GROQ_API_KEY", "")
             
-    #         # જો secrets માં નથી તો user input લો
-    #         if not groq_api_key:
-    #             st.title("🎤 AI Mock Interview")
-    #             st.markdown("**Configure your interview settings**")
-    #             st.markdown("---")
+            # જો secrets માં નથી તો user input લો
+            if not groq_api_key:
+                st.title("🎤 AI Mock Interview")
+                st.markdown("**Configure your interview settings**")
+                st.markdown("---")
                 
-    #             groq_api_key = st.text_input(
-    #                 "🔑 Enter Groq API Key:", 
-    #                 type="password",
-    #                 help="Get your free API key from https://console.groq.com"
-    #             )
+                groq_api_key = st.text_input(
+                    "🔑 Enter Groq API Key:", 
+                    type="password",
+                    help="Get your free API key from https://console.groq.com"
+                )
                 
-    #             st.info("💡 **Tip:** Add your API key to `.streamlit/secrets.toml` to avoid entering it every time")
+                st.info("💡 **Tip:** Add your API key to `.streamlit/secrets.toml` to avoid entering it every time")
             
-    #         # જો API key છે તો interview શરૂ કરો
-    #         if groq_api_key:
-    #             from SmartQuiz.aimockinterview import MockInterviewSystem
-    #             mock_system = MockInterviewSystem(groq_api_key)
-    #             mock_system.run()
-    #         else:
-    #             st.warning("⚠️ Please enter your Groq API key to use Mock Interview feature")
+            # જો API key છે તો interview શરૂ કરો
+            if groq_api_key:
+                from SmartQuiz.aimockinterview import MockInterviewSystem
+                mock_system = MockInterviewSystem(groq_api_key)
+                mock_system.run()
+            else:
+                st.warning("⚠️ Please enter your Groq API key to use Mock Interview feature")
                 
-    #             col1, col2, col3 = st.columns([1, 1, 1])
-    #             with col2:
-    #                 if st.button("⬅️ Back to Home", use_container_width=True):
-    #                     st.session_state.page = 'home'
-    #                     st.rerun()
+                col1, col2, col3 = st.columns([1, 1, 1])
+                with col2:
+                    if st.button("⬅️ Back to Home", use_container_width=True):
+                        st.session_state.page = 'home'
+                        st.rerun()
         
-    #     except Exception as e:
-    #         st.error(f"❌ Error loading Mock Interview: {str(e)}")
-    #         if st.button("⬅️ Back to Home"):
-    #             st.session_state.page = 'home'
-    #             st.rerun()
+        except Exception as e:
+            st.error(f"❌ Error loading Mock Interview: {str(e)}")
+            if st.button("⬅️ Back to Home"):
+                st.session_state.page = 'home'
+                st.rerun()
     
     
 if __name__ == "__main__":
