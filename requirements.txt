@@ -5,6 +5,7 @@ streamlit-extras
 streamlit-custom-notification-box
 python-docx
 pandas
+groq
 plotly
 pillow
 pycryptodome==3.20.0
