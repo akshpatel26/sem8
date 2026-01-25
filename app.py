@@ -549,7 +549,7 @@ class ResumeApp:
                 
     def add_footer(self):
         st.markdown("<hr style='margin-top: 50px; margin-bottom: 20px;'>", unsafe_allow_html=True)
-    
+        
         st.markdown("""
         <div style="
             text-align: center;
@@ -557,7 +557,7 @@ class ResumeApp:
             font-size: 14px;
             color: #555;
         ">
-            <p style="margin: 5px 0;">
+             <p style="margin: 5px 0;">
                 © 2025 <strong>CareerIQ.</strong> All rights reserved. Empowering careers with AI.
                 &nbsp;|&nbsp;
                 <a href="?page=privacy" style="color:#00bfa5; text-decoration:none;">Privacy</a>
@@ -568,7 +568,429 @@ class ResumeApp:
             </p>
         </div>
         """, unsafe_allow_html=True)
+        
+    def show_privacy_page(self):
+        """Display the Privacy/Terms & Conditions page"""
+        
+        # Custom CSS for this page
+        st.markdown("""
+        <style>
+        /* Privacy Page Specific Styles */
+        .privacy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .privacy-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .privacy-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .privacy-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
+        }
+        
+        .privacy-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            margin-top: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .terms-intro {
+            background: linear-gradient(145deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .terms-intro p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin: 0;
+        }
+        
+        .term-section {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 25px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .term-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .term-section:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .term-section:hover::before {
+            left: 100%;
+        }
+        
+        .term-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-right: 15px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            vertical-align: middle;
+        }
+        
+        .term-title {
+            color: #00bfa5;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .term-content {
+            color: #cccccc;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            padding-left: 60px;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, rgba(0, 191, 165, 0.15), rgba(0, 217, 197, 0.1));
+            border: 2px solid rgba(0, 191, 165, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 191, 165, 0.2);
+        }
+        
+        .contact-section p {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin: 0;
+            font-style: italic;
+        }
+        
+        .contact-section a {
+            color: #00bfa5;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-section a:hover {
+            color: #00d9c5;
+            border-bottom-color: #00d9c5;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 50px 0;
+            border: none;
+        }
+        
+        /* Icon styles */
+        .section-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        /* Scroll animation */
+        .term-section {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .term-section:nth-child(1) { animation-delay: 0.1s; }
+        .term-section:nth-child(2) { animation-delay: 0.2s; }
+        .term-section:nth-child(3) { animation-delay: 0.3s; }
+        .term-section:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        # Header
+        st.markdown("""
+        <div class="privacy-header">
+            <h1 class="privacy-title">📜 Terms & Conditions</h1>
+            <p class="privacy-subtitle">Please read carefully before using CareerIQ</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Introduction
+        st.markdown("""
+        <div class="terms-intro">
+            <p>
+                By using <strong style="color: #00bfa5; font-size: 1.2rem;">CareerIQ</strong>, 
+                you agree to comply with and be bound by the following terms and conditions. 
+                These terms govern your use of our platform and services.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Term 1
+        st.markdown("""
+        <div class="term-section">
+            <div class="term-title">
+                <span class="term-number">1</span>
+                <span class="section-icon">🎯</span>
+                Use of Services
+            </div>
+            <div class="term-content">
+                We help you find jobs, build resumes, and explore tools using APIs. Job listings shown are from external websites. 
+                We act as a bridge to connect you with opportunities but do not host or own these listings. All job applications 
+                are processed through the respective company websites.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Term 2
+        st.markdown("""
+        <div class="term-section">
+            <div class="term-title">
+                <span class="term-number">2</span>
+                <span class="section-icon">🔒</span>
+                No Data Misuse
+            </div>
+            <div class="term-content">
+                We don't store job content or misuse company data. We show public data and links with respect to original platforms. 
+                Your privacy is our priority, and we ensure all data handling complies with industry standards and regulations.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Term 3
+        st.markdown("""
+        <div class="term-section">
+            <div class="term-title">
+                <span class="term-number">3</span>
+                <span class="section-icon">✅</span>
+                User Agreement
+            </div>
+            <div class="term-content">
+                You agree to use the platform ethically and provide correct information. Any misuse of the platform, including 
+                but not limited to providing false information or attempting to harm the service, will result in immediate 
+                termination of access.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Term 4
+        st.markdown("""
+        <div class="term-section">
+            <div class="term-title">
+                <span class="term-number">4</span>
+                <span class="section-icon">⚖️</span>
+                Legal & Compliance
+            </div>
+            <div class="term-content">
+                We follow API usage rules and respect third-party rights. If any platform wants content removed, we will do so 
+                immediately. We maintain strict compliance with all applicable laws and regulations, and we expect our users 
+                to do the same.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Divider
+        st.markdown('<hr class="divider">', unsafe_allow_html=True)
+        
+        # Contact Section
+        st.markdown("""
+        <div class="contact-section">
+            <p>
+                ℹ️ By registering and using CareerIQ, you acknowledge that you have read, understood, and agree to be bound by these terms.<br><br>
+                📧 For questions or concerns, please contact us at 
+                <a href="mailto:contact.careeriq@gmail.com">contact.careeriq@gmail.com</a>
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Back to Home button
+        st.markdown("<br>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            if st.button("⬅️ Back to Home", key="back_home_privacy", use_container_width=True, type="primary"):
+                st.query_params.clear()
+                st.session_state.page = 'home'
+                st.rerun()
     
+    # def show_about_page(self):
+    #     """Display the About Us page"""
+    #     apply_modern_styles()
+        
+    #     st.markdown("""
+    #     <div style="max-width: 900px; margin: 0 auto; padding: 40px 20px;">
+    #         <h1 style="color: #00bfa5; text-align: center; margin-bottom: 40px;">About CareerIQ</h1>
+            
+    #         <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);">
+    #             <h3 style="color: #00bfa5; margin-bottom: 15px;">🚀 Our Mission</h3>
+    #             <p style="color: #ccc; line-height: 1.8; margin-bottom: 30px;">
+    #                 CareerIQ is dedicated to empowering job seekers with AI-powered tools to navigate their career journey. 
+    #                 We combine cutting-edge technology with user-friendly design to make job searching, resume building, and 
+    #                 career planning accessible to everyone.
+    #             </p>
+                
+    #             <h3 style="color: #00bfa5; margin-bottom: 15px;">💡 What We Offer</h3>
+    #             <ul style="color: #ccc; line-height: 2; margin-bottom: 30px;">
+    #                 <li><strong>AI-Powered Job Search:</strong> Find relevant opportunities tailored to your skills</li>
+    #                 <li><strong>Resume Builder:</strong> Create professional resumes with intelligent suggestions</li>
+    #                 <li><strong>Career Tools:</strong> Access resources to boost your professional growth</li>
+    #                 <li><strong>Interview Prep:</strong> Get ready with AI-driven practice and tips</li>
+    #             </ul>
+                
+    #             <h3 style="color: #00bfa5; margin-bottom: 15px;">🎯 Our Vision</h3>
+    #             <p style="color: #ccc; line-height: 1.8;">
+    #                 To become the most trusted platform for career development, helping millions achieve their professional goals 
+    #                 through innovative AI solutions.
+    #             </p>
+                
+    #             <p style="color: #999; margin-top: 40px; text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+    #                 Built with ❤️ by the CareerIQ Team
+    #             </p>
+    #         </div>
+    #     </div>
+    #     """, unsafe_allow_html=True)
+        
+    #     st.markdown("<br><br>", unsafe_allow_html=True)
+    #     col1, col2, col3 = st.columns([1, 2, 1])
+    #     with col2:
+    #         if st.button("← Back to Home", key="back_home_about", use_container_width=True):
+    #             st.query_params.clear()
+    #             st.session_state.page = 'home'
+    #             st.rerun()
+    
+    # def show_help_page(self):
+    #     """Display the Help/FAQ page"""
+    #     apply_modern_styles()
+        
+    #     st.markdown("""
+    #     <div style="max-width: 900px; margin: 0 auto; padding: 40px 20px;">
+    #         <h1 style="color: #00bfa5; text-align: center; margin-bottom: 40px;">Help & FAQs</h1>
+            
+    #         <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);">
+    #             <h3 style="color: #00bfa5; margin-bottom: 30px;">❓ Frequently Asked Questions</h3>
+                
+    #             <div style="margin-bottom: 25px;">
+    #                 <h4 style="color: #fff; margin-bottom: 10px;">Q: How does CareerIQ work?</h4>
+    #                 <p style="color: #ccc; line-height: 1.8;">
+    #                     CareerIQ uses AI and APIs to aggregate job listings from various platforms, helping you find opportunities 
+    #                     that match your skills and preferences.
+    #                 </p>
+    #             </div>
+                
+    #             <div style="margin-bottom: 25px;">
+    #                 <h4 style="color: #fff; margin-bottom: 10px;">Q: Is CareerIQ free to use?</h4>
+    #                 <p style="color: #ccc; line-height: 1.8;">
+    #                     Yes! Our core features are completely free for all users.
+    #                 </p>
+    #             </div>
+                
+    #             <div style="margin-bottom: 25px;">
+    #                 <h4 style="color: #fff; margin-bottom: 10px;">Q: Do you store my personal data?</h4>
+    #                 <p style="color: #ccc; line-height: 1.8;">
+    #                     We respect your privacy. We don't store job content or misuse your data. Please review our Privacy Policy for details.
+    #                 </p>
+    #             </div>
+                
+    #             <div style="margin-bottom: 25px;">
+    #                 <h4 style="color: #fff; margin-bottom: 10px;">Q: How do I create a resume?</h4>
+    #                 <p style="color: #ccc; line-height: 1.8;">
+    #                     Navigate to the Resume Builder section and follow the step-by-step guide to create a professional resume.
+    #                 </p>
+    #             </div>
+                
+    #             <div style="margin-bottom: 25px;">
+    #                 <h4 style="color: #fff; margin-bottom: 10px;">Q: Can I export my resume?</h4>
+    #                 <p style="color: #ccc; line-height: 1.8;">
+    #                     Yes! You can download your resume in PDF format once it's ready.
+    #                 </p>
+    #             </div>
+                
+    #             <h3 style="color: #00bfa5; margin-top: 40px; margin-bottom: 15px;">📧 Still Need Help?</h3>
+    #             <p style="color: #ccc; line-height: 1.8;">
+    #                 Contact us at <a href="mailto:contact.careeriq@gmail.com" style="color: #00bfa5; text-decoration: none;">
+    #                 contact.careeriq@gmail.com</a> and we'll get back to you within 24-48 hours.
+    #             </p>
+    #         </div>
+    #     </div>
+    #     """, unsafe_allow_html=True)
+        
+    #     st.markdown("<br><br>", unsafe_allow_html=True)
+    #     col1, col2, col3 = st.columns([1, 2, 1])
+    #     with col2:
+    #         if st.button("← Back to Home", key="back_home_help", use_container_width=True):
+    #             st.query_params.clear()
+    #             st.session_state.page = 'home'
+    #             st.rerun()
+        
     
     def render_dashboard(self):
         """Render the dashboard page"""
@@ -4502,7 +4924,19 @@ class ResumeApp:
     def main(self):
         """Main application without sidebar"""
         self.apply_global_styles()
-    
+         #CHECK FOR QUERY PARAMETERS FIRST (for footer links)
+        query_params = st.query_params
+        if "page" in query_params:
+            page_param = query_params["page"]
+        
+            if page_param == "privacy":
+                self.show_privacy_page()
+                return  # Stop here, don't show other content
+            # elif page_param == "about":
+            #     self.show_about_page()
+            #     return
+         
+        
         # Force home page on first load
         if 'initial_load' not in st.session_state:
             st.session_state.initial_load = True
