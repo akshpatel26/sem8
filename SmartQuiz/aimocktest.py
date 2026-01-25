@@ -530,7 +530,7 @@ def static_quiz_setup():
     # Show settings if category selected (and not programming)
     if st.session_state.quiz_state.get('category') and st.session_state.quiz_state['category'] != 'programming':
         show_static_quiz_settings()
-        return  # Stop here, don't show category buttons
+        return
     
     # Show category selection only if not selected
     st.markdown("### Select Category:")
@@ -567,11 +567,29 @@ def static_quiz_setup():
                     st.session_state.quiz_state['phase'] = 'programming_language'
                 st.rerun()
     
-    # Add Back button
+    # Add Back button with CSS targeting by position
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Inject CSS to style the next button
+    st.markdown("""
+        <style>
+        /* Target all secondary buttons and make them yellow */
+        button[kind="secondary"] {
+            background-color: #FFC107 !important;
+            color: #000000 !important;
+            font-weight: bold !important;
+            border: none !important;
+        }
+        button[kind="secondary"]:hover {
+            background-color: #FFD54F !important;
+            box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3) !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        if st.button("⬅️ Back to Mode Selection", use_container_width=True):
+        if st.button("⬅️ Back to Mode Selection", key="back_to_mode", use_container_width=True, type="secondary"):
             st.session_state.quiz_state['quiz_mode'] = ''
             st.rerun()
 
@@ -784,6 +802,22 @@ def ai_quiz_setup():
                     st.session_state.quiz_state['ai_topic'] = set_name
                     st.rerun()
         
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("""
+        <style>
+        /* Target all secondary buttons and make them yellow */
+        button[kind="secondary"] {
+            background-color: #FFC107 !important;
+            color: #000000 !important;
+            font-weight: bold !important;
+            border: none !important;
+        }
+        button[kind="secondary"]:hover {
+            background-color: #FFD54F !important;
+            box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3) !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
         # Back button below topic selection
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
