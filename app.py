@@ -4518,15 +4518,15 @@ class ResumeApp:
             'resume_analyzer': '🔍 RESUME ANALYZER',
             'portfolio_builder': '📁 PORTFOLIO BUILDER',
             'smartprep_ai_': '🧩 SmartPrep AI ',
-            'mock_interview': '🎤 MOCK INTERVIEW',  # ← આ add કરો
+            'mock_interview': '🎤 MOCK INTERVIEW',  
             'job_search': '🎯 JOB SEARCH',
             'dashboard': '📊 DASHBOARD',
             'feedback': '💬 FEEDBACK',
         }
         
-        # Handle mock_interview page separately (કારણ કે તે pages dict માં નથી)
+        # Handle mock_interview page separately 
         if current_page == 'mock_interview':
-            self.render_mock_interview()  # ← નવું method call
+            self.render_mock_interview()  
         # Render the appropriate page
         elif current_page in page_mapping:
             page_name = page_mapping[current_page]
@@ -4544,10 +4544,8 @@ class ResumeApp:
     def render_mock_interview(self):
         """Render mock interview page"""
         try:
-            # API key લો secrets માંથી
             groq_api_key = st.secrets.get("GROQ_API_KEY", "")
             
-            # જો secrets માં નથી તો user input લો
             if not groq_api_key:
                 st.title("🎤 AI Mock Interview")
                 st.markdown("**Configure your interview settings**")
@@ -4561,7 +4559,6 @@ class ResumeApp:
                 
                 st.info("💡 **Tip:** Add your API key to `.streamlit/secrets.toml` to avoid entering it every time")
             
-            # જો API key છે તો interview શરૂ કરો
             if groq_api_key:
                 from SmartQuiz.aimockinterview import MockInterviewSystem
                 mock_system = MockInterviewSystem(groq_api_key)
