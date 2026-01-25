@@ -318,7 +318,6 @@ Be concise and actionable."""
     def render_results_screen(self):
         """Render interview results and feedback"""
         st.success("🎉 Interview Complete!")
-        st.balloons()
         
         with st.spinner("⚡ Generating comprehensive feedback..."):
             summary = self.get_final_summary(
@@ -433,7 +432,7 @@ Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
         """Main method to run the mock interview system"""
         self.add_back_to_home_button()
 
-        st.title("💬 AI Mock Interview")
+        st.subheader("💬 AI Mock Interview")
         st.markdown("**⚡ Fast & Smart Text-Based Interview** - Type your responses!")
 
         self.initialize_session_state()
