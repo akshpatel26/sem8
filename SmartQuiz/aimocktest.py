@@ -1134,7 +1134,6 @@ def results_phase():
             else:
                 st.caption(f"⏱️ Time: {time_taken:.1f}s")
                 
-            # Action buttons
     col1, col2= st.columns([1, 1])
     
     with col1:
