@@ -780,7 +780,7 @@ class ResumeApp:
         # Header
         st.markdown("""
         <div class="privacy-header">
-            <h1 class="privacy-title">📜 Terms & Conditions</h1>
+            <h1 class="privacy-title"> Terms & Conditions</h1>
             <p class="privacy-subtitle">Please read carefully before using CareerIQ</p>
         </div>
         """, unsafe_allow_html=True)
@@ -2469,7 +2469,7 @@ class ResumeApp:
                 
                 with col3:
                     st.markdown("#### 📋 JSON Format")
-                    if st.button("Generate JSON", type="secondary", use_container_width=True):
+                    if st.button("Generate JSON", type="primary", use_container_width=True):
                         import json
                         json_data = json.dumps(st.session_state.portfolio_data, indent=2)
                         st.download_button(
@@ -4750,28 +4750,28 @@ class ResumeApp:
                 "initials": "AP",
                 "role": "Software Developer",
                 "avatar_class": "avatar-purple",
-                "github": "#"
+                "github": "https://github.com/akshpatel26"
             },
             {
                 "name": "Ayush Patel",
                 "initials": "AP",
                 "role": "Software Developer",
                 "avatar_class": "avatar-blue",
-                "github": "#"
+                "github": "https://github.com/iamayushpatel"
             },
             { 
                 "name": "Prinsi Patel",
                 "initials": "PP",
                 "role": "AI Developer",
                 "avatar_class": "avatar-purple",
-                "github": "#"
+                "github": "https://github.com/princypatel1712"
             },
             {
                 "name": "Prerna Patel",
                 "initials": "PP",
                 "role": "Technical Support",
                 "avatar_class": "avatar-pink",
-                "github": "#"
+                "github": "https://github.com/PrernnaPatel"
             }
         ]
         
@@ -4874,51 +4874,39 @@ class ResumeApp:
         # Add some spacing at the bottom
         st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
         
-        
-        
+            
+            
     def add_back_to_home_button(self):
-        """Add a floating back to home button on the left side"""
-        
-        apply_modern_styles()
-
         st.markdown("""
         <style>
-        .back-to-home-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 9999;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 14px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
+        /* Target only this specific button */
+        div[data-testid="stButton"] button[kind="primary"] {
+            background: linear-gradient(180deg, #FFD34E, #FFC107);
+            color: #000;
+            border-radius: 14px;
+            padding: 10px 22px;
             font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+            transition: all 0.2s ease-in-out;
         }
-        
-        .back-to-home-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    
+        div[data-testid="stButton"] button[kind="primary"]:hover {
+            background: linear-gradient(180deg, #FFE082, #FFB300);
+            transform: translateY(-1px);
         }
-        
-        .back-to-home-btn:active {
-            transform: translateY(0px);
+    
+        div[data-testid="stButton"] button[kind="primary"]:active {
+            transform: scale(0.98);
         }
         </style>
         """, unsafe_allow_html=True)
-        
-        # Create the button
-        if st.button("⬅️ Back to Home", key="back_home_btn", help="Return to main dashboard"):
-            st.session_state.page = 'home'
+    
+        if st.button("⬅ Back to Home", key="back_home_btn", type="primary"):
+            st.session_state.page = "home"
             st.rerun()
+
     
     
     def main(self):
