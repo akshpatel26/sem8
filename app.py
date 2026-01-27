@@ -1659,66 +1659,57 @@ class ResumeApp:
         if 'portfolio_data' not in st.session_state:
             st.session_state.portfolio_data = {
                 'personal_info': {
-                    'name': 'John Doe',
-                    'tagline': 'Full-Stack Developer & UI/UX Enthusiast',
-                    'email': 'john@example.com',
-                    'phone': '+1 (555) 123-4567',
-                    'linkedin': 'linkedin.com/in/johndoe',
-                    'github': 'github.com/johndoe',
-                    'twitter': 'twitter.com/johndoe',
-                    'website': 'johndoe.com'
+                    'name': '',
+                    'tagline': '',
+                    'email': '',
+                    'phone': '',
+                    'linkedin': '',
+                    'github': '',
+                    'twitter': '',
+                    'website': ''
                 },
-                'about': 'Passionate full-stack developer with 5+ years of experience building scalable web applications. Specialized in React, Node.js, and cloud technologies. Love turning complex problems into elegant solutions.',
+                'about': '',
                 'skills': {
-                    'Frontend': ['React', 'Vue.js', 'TypeScript', 'Tailwind CSS'],
-                    'Backend': ['Node.js', 'Python', 'Django', 'PostgreSQL'],
-                    'Tools': ['Git', 'Docker', 'AWS', 'CI/CD'],
-                    'Soft Skills': ['Leadership', 'Communication', 'Problem Solving']
+                    'Frontend': [],
+                    'Backend': [],
+                    'Tools': [],
+                    'Soft Skills': []
                 },
                 'projects': [
                     {
-                        'title': 'E-Commerce Platform',
-                        'tech_stack': 'React, Node.js, MongoDB, Stripe',
-                        'description': 'Built a fully-featured e-commerce platform with payment integration, inventory management, and real-time analytics.',
-                        'link': 'https://example.com'
+                        'title': '',
+                        'tech_stack': '',
+                        'description': '',
+                        'link': ''
                     },
-                    {
-                        'title': 'AI Content Generator',
-                        'tech_stack': 'Python, FastAPI, OpenAI, React',
-                        'description': 'Developed an AI-powered content generation tool that helps marketers create engaging content.',
-                        'link': 'https://example.com'
-                    }
+                    
                 ],
                 'experience': [
                     {
-                        'role': 'Senior Full Stack Developer',
-                        'company': 'Tech Corp Inc.',
-                        'duration': 'Jan 2022 - Present',
-                        'description': 'Leading a team of 5 developers in building scalable web applications. Implemented CI/CD pipelines reducing deployment time by 60%.'
+                        'role': '',
+                        'company': '',
+                        'duration': '',
+                        'description': ''
                     }
                 ],
                 'education': [
                     {
-                        'degree': 'B.Tech in Computer Science',
-                        'college': 'MIT University',
-                        'cgpa': '8.5/10',
-                        'duration': '2015 - 2019'
+                        'degree': '',
+                        'college': '',
+                        'cgpa': '',
+                        'duration': ''
                     }
                 ],
                 'certifications': [
                     {
-                        'name': 'AWS Certified Solutions Architect',
-                        'issuer': 'Amazon Web Services'
+                        'name': '',
+                        'issuer': ''
                     },
-                    {
-                        'name': 'Google Cloud Professional Developer',
-                        'issuer': 'Google Cloud'
-                    }
+                    
                 ],
                 'achievements': [
-                    'Won Best Innovation Award at TechHack 2023',
-                    'Published research paper on Machine Learning in IEEE',
-                    'Mentored 50+ students in web development'
+                    '',
+                    
                 ]
             }
         
@@ -1798,19 +1789,19 @@ class ResumeApp:
                 with st.expander("👤 Personal Information", expanded=True):
                     col1, col2 = st.columns(2)
                     with col1:
-                        name = st.text_input("Full Name *", st.session_state.portfolio_data['personal_info']['name'], key="port_name")
-                        email = st.text_input("Email *", st.session_state.portfolio_data['personal_info']['email'], key="port_email")
-                        phone = st.text_input("Phone", st.session_state.portfolio_data['personal_info']['phone'], key="port_phone")
+                        name = st.text_input("Full Name *", st.session_state.portfolio_data['personal_info']['name'], key="port_name", placeholder="John Doe",)
+                        email = st.text_input("Email *", st.session_state.portfolio_data['personal_info']['email'], key="port_email",placeholder="john@example.com")
+                        phone = st.text_input("Phone", st.session_state.portfolio_data['personal_info']['phone'], key="port_phone",placeholder="+1 (555) 123-4567")
                     with col2:
-                        tagline = st.text_input("Professional Tagline *", st.session_state.portfolio_data['personal_info']['tagline'], key="port_tagline")
-                        linkedin = st.text_input("LinkedIn", st.session_state.portfolio_data['personal_info']['linkedin'], key="port_linkedin")
-                        github = st.text_input("GitHub", st.session_state.portfolio_data['personal_info']['github'], key="port_github")
+                        tagline = st.text_input("Professional Tagline *", st.session_state.portfolio_data['personal_info']['tagline'], key="port_tagline",placeholder="Full-Stack Developer & UI/UX Enthusiast")
+                        linkedin = st.text_input("LinkedIn", st.session_state.portfolio_data['personal_info']['linkedin'], key="port_linkedin",placeholder="linkedin.com/in/johndoe")
+                        github = st.text_input("GitHub", st.session_state.portfolio_data['personal_info']['github'], key="port_github",placeholder="github.com/johndoe")
                     
                     col3, col4 = st.columns(2)
                     with col3:
-                        website = st.text_input("Website", st.session_state.portfolio_data['personal_info'].get('website', ''), key="port_website")
+                        website = st.text_input("Website", st.session_state.portfolio_data['personal_info'].get('website', ''), key="port_website",placeholder="johndoe.com")
                     with col4:
-                        twitter = st.text_input("Twitter", st.session_state.portfolio_data['personal_info'].get('twitter', ''), key="port_twitter")
+                        twitter = st.text_input("Twitter", st.session_state.portfolio_data['personal_info'].get('twitter', ''), key="port_twitter",placeholder="twitter.com/johndoe")
                 
                 # About Me
                 with st.expander("📝 About Me", expanded=True):
@@ -1819,7 +1810,8 @@ class ResumeApp:
                         st.session_state.portfolio_data['about'],
                         height=120,
                         help="Write 2-3 sentences about your background and expertise",
-                        key="port_about"
+                        key="port_about",
+                        placeholder="Passionate full-stack developer with 5+ years of experience building scalable web applications. Specialized in React, Node.js, and cloud technologies. Love turning complex problems into elegant solutions."
                     )
                 
                 # Skills
@@ -1833,17 +1825,18 @@ class ResumeApp:
                         frontend = st.text_area("Frontend Technologies", 
                             ', '.join(default_skills.get('Frontend', [])), 
                             help="e.g., React, Vue.js, TypeScript",
-                            key="port_frontend")
+                            key="port_frontend",
+                            placeholder="React, Vue.js, TypeScript, Tailwind CSS")
                         backend = st.text_area("Backend Technologies", 
                             ', '.join(default_skills.get('Backend', [])),
-                            key="port_backend")
+                            key="port_backend",placeholder="Node.js, Python, Django, PostgreSQL")
                     with col2:
                         tools = st.text_area("Tools & Platforms", 
                             ', '.join(default_skills.get('Tools', [])),
-                            key="port_tools")
+                            key="port_tools",placeholder="Git, Docker, AWS, CI/CD")
                         soft_skills = st.text_area("Soft Skills", 
                             ', '.join(default_skills.get('Soft Skills', [])),
-                            key="port_soft")
+                            key="port_soft",placeholder="Leadership, Communication, Problem Solving")
                 
                 # Projects
                 with st.expander("💼 Projects", expanded=True):
@@ -1856,11 +1849,11 @@ class ResumeApp:
                         default_proj = st.session_state.portfolio_data['projects'][i] if i < len(st.session_state.portfolio_data['projects']) else {}
                         
                         with col1:
-                            title = st.text_input(f"Project Title *", default_proj.get('title', f'Project {i+1}'), key=f"proj_title_{i}")
-                            tech = st.text_input(f"Tech Stack", default_proj.get('tech_stack', ''), key=f"proj_tech_{i}")
+                            title = st.text_input(f"Project Title *", default_proj.get('title', f'Project {i+1}'), key=f"proj_title_{i}",placeholder="E-Commerce Platform")
+                            tech = st.text_input(f"Tech Stack", default_proj.get('tech_stack', ''), key=f"proj_tech_{i}",placeholder="React, Node.js, MongoDB, Stripe")
                         with col2:
-                            desc = st.text_area(f"Description", default_proj.get('description', ''), key=f"proj_desc_{i}", height=100)
-                            link = st.text_input(f"Project Link", default_proj.get('link', ''), key=f"proj_link_{i}")
+                            desc = st.text_area(f"Description", default_proj.get('description', ''), key=f"proj_desc_{i}", height=100,placeholder="Built a fully-featured e-commerce platform with payment integration, inventory management, and real-time analytics.")
+                            link = st.text_input(f"Project Link", default_proj.get('link', ''), key=f"proj_link_{i}",placeholder="https://example.com")
                         
                         projects.append({'title': title, 'tech_stack': tech, 'description': desc, 'link': link})
                         if i < num_projects - 1:
@@ -1877,12 +1870,12 @@ class ResumeApp:
                         default_exp = st.session_state.portfolio_data['experience'][i] if i < len(st.session_state.portfolio_data.get('experience', [])) else {}
                         
                         with col1:
-                            role = st.text_input("Job Title", default_exp.get('role', ''), key=f"exp_role_{i}")
-                            company = st.text_input("Company", default_exp.get('company', ''), key=f"exp_company_{i}")
+                            role = st.text_input("Job Title", default_exp.get('role', ''), key=f"exp_role_{i}",placeholder="Senior Full Stack Developer")
+                            company = st.text_input("Company", default_exp.get('company', ''), key=f"exp_company_{i}",placeholder="Tech Corp Inc.")
                         with col2:
-                            duration = st.text_input("Duration", default_exp.get('duration', ''), key=f"exp_duration_{i}")
+                            duration = st.text_input("Duration", default_exp.get('duration', ''), key=f"exp_duration_{i}",placeholder="Jan 2022 - Present")
                         
-                        description = st.text_area("Description", default_exp.get('description', ''), key=f"exp_desc_{i}", height=100)
+                        description = st.text_area("Description", default_exp.get('description', ''), key=f"exp_desc_{i}", height=100,placeholder="Leading a team of 5 developers in building scalable web applications. Implemented CI/CD pipelines reducing deployment time by 60%.")
                         
                         experience.append({'role': role, 'company': company, 'duration': duration, 'description': description})
                         if i < num_exp - 1:
@@ -1899,11 +1892,11 @@ class ResumeApp:
                         default_edu = st.session_state.portfolio_data['education'][i] if i < len(st.session_state.portfolio_data.get('education', [])) else {}
                         
                         with col1:
-                            degree = st.text_input("Degree", default_edu.get('degree', ''), key=f"edu_degree_{i}")
-                            college = st.text_input("Institution", default_edu.get('college', ''), key=f"edu_college_{i}")
+                            degree = st.text_input("Degree", default_edu.get('degree', ''), key=f"edu_degree_{i}",placeholder="B.Tech in Computer Science")
+                            college = st.text_input("Institution", default_edu.get('college', ''), key=f"edu_college_{i}",placeholder="MIT University")
                         with col2:
-                            cgpa = st.text_input("CGPA/Grade", default_edu.get('cgpa', ''), key=f"edu_cgpa_{i}")
-                            duration = st.text_input("Duration", default_edu.get('duration', ''), key=f"edu_duration_{i}")
+                            cgpa = st.text_input("CGPA/Grade", default_edu.get('cgpa', ''), key=f"edu_cgpa_{i}",placeholder="8.5/10")
+                            duration = st.text_input("Duration", default_edu.get('duration', ''), key=f"edu_duration_{i}",placeholder="2015 - 2019")
                         
                         education.append({'degree': degree, 'college': college, 'cgpa': cgpa, 'duration': duration})
                         if i < num_edu - 1:
@@ -1919,9 +1912,9 @@ class ResumeApp:
                         default_cert = st.session_state.portfolio_data['certifications'][i] if i < len(st.session_state.portfolio_data.get('certifications', [])) else {}
                         
                         with col1:
-                            cert_name = st.text_input(f"Certification {i+1}", default_cert.get('name', ''), key=f"cert_name_{i}")
+                            cert_name = st.text_input(f"Certification {i+1}", default_cert.get('name', ''), key=f"cert_name_{i}",placeholder="AWS Certified Solutions Architect")
                         with col2:
-                            cert_issuer = st.text_input(f"Issuer {i+1}", default_cert.get('issuer', ''), key=f"cert_issuer_{i}")
+                            cert_issuer = st.text_input(f"Issuer {i+1}", default_cert.get('issuer', ''), key=f"cert_issuer_{i}",placeholder="Amazon Web Services")
                         
                         certifications.append({'name': cert_name, 'issuer': cert_issuer})
                 
@@ -1931,7 +1924,7 @@ class ResumeApp:
                     achievements = []
                     for i in range(num_achievements):
                         default_achievement = st.session_state.portfolio_data['achievements'][i] if i < len(st.session_state.portfolio_data.get('achievements', [])) else ''
-                        achievement = st.text_input(f"Achievement {i+1}", default_achievement, key=f"achievement_{i}")
+                        achievement = st.text_input(f"Achievement {i+1}", default_achievement, key=f"achievement_{i}",placeholder="Published research paper on Machine Learning in IEEE")
                         if achievement:
                             achievements.append(achievement)
                 
