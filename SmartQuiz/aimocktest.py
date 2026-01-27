@@ -472,7 +472,6 @@ def setup_phase():
     
 def ml_quiz_setup():
     """ML-Based quiz setup interface"""
-    st.markdown("---")
     st.markdown("## 📚 ML-Based Quiz Setup")
     # st.markdown("This feature generates questions from your uploaded semester materials using advanced ML algorithms.")
     
