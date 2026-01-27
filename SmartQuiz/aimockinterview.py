@@ -389,51 +389,54 @@ Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
         return transcript
     
     def add_back_to_home_button(self):
-        """Add a floating back to home button on the left side"""
         st.markdown("""
         <style>
-        .back-to-home-btn {
-            position: fixed;
-            left: 20px;
-            top: 20px;
-            z-index: 9999;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
+        /* Target only this specific button */
+        div[data-testid="stButton"] button[kind="primary"] {
+            background: linear-gradient(180deg, #FFD34E, #FFC107);
+            color: #000;
+            border-radius: 14px;
+            padding: 10px 22px;
             font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+            transition: all 0.2s ease-in-out;
         }
-        
-        .back-to-home-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    
+        div[data-testid="stButton"] button[kind="primary"]:hover {
+            background: linear-gradient(180deg, #FFE082, #FFB300);
+            transform: translateY(-1px);
         }
-        
-        .back-to-home-btn:active {
-            transform: translateY(0px);
+    
+        div[data-testid="stButton"] button[kind="primary"]:active {
+            transform: scale(0.98);
         }
         </style>
         """, unsafe_allow_html=True)
-        
-        if st.button("⬅️ Back to Home", key="back_home_btn", help="Return to main dashboard"):
-            st.session_state.page = 'home'
+    
+        if st.button("⬅ Back to Home", key="back_home_btn", type="primary"):
+            st.session_state.page = "home"
             st.rerun()
     
     def run(self):
         """Main method to run the mock interview system"""
         self.add_back_to_home_button()
 
-        st.subheader("💬 AI Mock Interview")
-        st.markdown("**⚡ Fast & Smart Text-Based Interview** - Type your responses!")
+        st.markdown("""
+<div style="
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 16px 20px;
+    border-radius: 12px;
+    color: white;
+">
+    <h3 style="margin-bottom: 6px;">AI Mock Interview</h3>
+    <p style="margin: 0; opacity: 0.9;">
+        Fast & smart text-based interview — type your responses and get instant feedback
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
 
         self.initialize_session_state()
         
