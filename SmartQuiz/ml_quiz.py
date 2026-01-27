@@ -169,12 +169,12 @@ class MLQuizInterface:
                             st.session_state.ml_step = 4
                             st.rerun()
                 
-                # Back to Learning Modes button
-                st.markdown("---")
-                if st.button("🏠 Back to Learning Modes", use_container_width=True, type="secondary", key="back_step3"):
-                    self.reset_quiz()
-                    st.session_state.quiz_state['quiz_mode'] = ''
-                    st.rerun()
+                # # Back to Learning Modes button
+                # st.markdown("---")
+                # if st.button("🏠 Back to Learning Modes", use_container_width=True, type="secondary", key="back_step3"):
+                #     self.reset_quiz()
+                #     st.session_state.quiz_state['quiz_mode'] = ''
+                #     st.rerun()
             else:
                 st.warning("⚠️ No topics found for this subject.")
         
@@ -247,12 +247,12 @@ class MLQuizInterface:
                             except Exception as e:
                                 st.error(f"❌ Error generating quiz: {str(e)}")
             
-            # Back to Learning Modes button
-            st.markdown("---")
-            if st.button("🏠 Back to Learning Modes", use_container_width=True, type="secondary", key="back_step4"):
-                self.reset_quiz()
-                st.session_state.quiz_state['quiz_mode'] = ''
-                st.rerun()
+            # # Back to Learning Modes button
+            # st.markdown("---")
+            # if st.button("🏠 Back to Learning Modes", use_container_width=True, type="secondary", key="back_step4"):
+            #     self.reset_quiz()
+            #     st.session_state.quiz_state['quiz_mode'] = ''
+            #     st.rerun()
 
     def render_quiz_page(self):
         """Render quiz questions with difficulty indicator"""
