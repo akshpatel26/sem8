@@ -56,7 +56,7 @@ class MLQuizInterface:
             col1, col2 = st.columns(2)
             
             with col1:
-                st.markdown("#### 📚 Step 1: Select Semester")
+                st.markdown("#### Step 1: Select Semester")
                 semesters = [f"Sem {i}" for i in range(1, 9)]
                 selected_sem = st.selectbox(
                     "Choose your semester",
@@ -72,7 +72,7 @@ class MLQuizInterface:
             
             with col2:
                 if st.session_state.ml_selected_sem:
-                    st.markdown("#### 📖 Step 2: Select Subject")
+                    st.markdown("####  Step 2: Select Subject")
                     subjects = self.quiz_gen.get_subjects(st.session_state.ml_selected_sem)
                     
                     if subjects:
@@ -111,7 +111,7 @@ class MLQuizInterface:
             # Header with Select All button
             header_col1, header_col2 = st.columns([3, 1])
             with header_col1:
-                st.markdown("#### 📝 Step 3: Select Topics (Choose 10-15 topics)")
+                st.markdown("#### Step 3: Select Topics (Choose 10-15 topics)")
             with header_col2:
                 if st.button("✅ Select All Topics", use_container_width=True, key="select_all_btn"):
                     st.session_state.ml_all_topics_selected = True
@@ -184,7 +184,7 @@ class MLQuizInterface:
             st.info(f"📚 **Semester:** {st.session_state.ml_selected_sem}  |  📖 **Subject:** {st.session_state.ml_selected_subject}  |  📝 **Topics:** {len(st.session_state.ml_selected_topics)} selected")
             
             st.markdown("---")
-            st.markdown("#### 🎯 Step 4: Select Difficulty Level")
+            st.markdown("#### Step 4: Select Difficulty Level")
             
             difficulty_cols = st.columns(3)
             
