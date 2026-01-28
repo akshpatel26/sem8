@@ -20,24 +20,43 @@
    - **Customizable Sections**
 
 
-2. 🕵️ **Deep Resume Analysis :**  
-   - 🛡️ ATS Compatibility Score  
-   - 🔑 Keyword Gap Analysis  
-   - 🧩 Role-specific Feedback  
-   - 📊 Skills Gap Breakdown  
+2. 🕵️ **Resume Analysis :**  
+   - Rule-based evaluation providing ATS score, format assessment, missing skills identification, and actionable improvement etc...
+   - User-uploaded resume is sent to the Groq AI API for intelligent processing. 
+   - AI optimizes the resume to achieve a higher ATS score and generates an updated DOCX resume for download.  
+   - Supports uploading up to 20 resumes simultaneously.
 
-3. 💼 **Job Application Portal :**  
+3. 🌐 **Portfolio Builder :**
+    - 4 professionally designed portfolio templates
+    - Real-time preview while editing portfolio content
+    - Users can export their portfolio as an HTML file (ready-to-host website), JSON file (structured data for reuse), or DOCX file (Word document for offline sharing and printing).
+      
+4. 💼 **Job Application Portal :**  
    - 🔍 Multi-Portal Search (Naukri, Indeed, Glassdoor, LinkedIn)  
    - 🤖 AI Match Score + Custom Cover Letter  
    - 🌐 LinkedIn Scraper → Direct Job Fetch & Role-Specific Cover Letter  
    - 📊 Job Market Insights (Skills, Locations, Salaries, Companies)  
 
-4. 🧮 **Smart Quiz :**
-   - 🤖 AI-Generated Quizzes
-   - ⚡ Flexible Customization
-   - 🔄 Adaptive Practice
-   - 🎯 Wide Coverage
+5. 🧮 **Smart Quiz :**
+   - Practice quizzes across multiple domains:
+     -  arithmetic aptitude 
+     -  verbal and Reasoning 
+     -  Programming
+     -  Core Concepts
+     -  Technical MCQS
+   - Supports mixed quizzes combining multiple fields(AI Generated Quiz)
+   - Provides instant evaluation with correct answers and explanations
+   - Semester-wise (Sem 1–8) and subject-wise quiz generation for focused learning.
   
+6. 🤖 **AI Interviewer:**
+   - Choose your level: Beginner, Intermediate, or Advanced
+   - System generates interview-style questions using Groq
+   - Users can answer by typing
+   - Answers are evaluated in real-time with:
+     - Score out of 10
+     - Personalized feedback on strengths and areas for improvementOption 
+
+             
 
 
 ## <img src="https://github.com/user-attachments/assets/0cefad05-58a9-4aa0-a070-f75a0c9b0353" height="32px">  Tech Stack 
